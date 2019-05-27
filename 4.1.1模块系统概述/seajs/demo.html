@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sea.js</title>
+</head>
+<body>
+<script src="sea.js"></script>
+<script>
+    //配置
+    seajs.config({
+        alias: {
+            'a': './a',
+            'b': './b'
+        }
+    });
+
+    //启动模块加载器
+    seajs.use(['a', 'b'], function(a, b){
+        console.log(a);
+        console.log(b);
+    })
+</script>
+</body>
+</html>

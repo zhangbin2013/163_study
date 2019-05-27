@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>require</title>
+</head>
+<body>
+<script src="require.js"></script>
+<script>
+    require.config({
+        paths: {
+            'a': './a',
+            'b': './b'
+        }
+    });
+    require(['a', 'b'], function(a, b){
+        console.log(a)
+        console.log(b)
+    })
+</script>
+</body>
+</html>
