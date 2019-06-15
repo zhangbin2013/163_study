@@ -45,6 +45,7 @@
         });
     }
 
+    //功能扩展
     $.fn[plugin].extendRules = function (option) {
         $.extend(RULES, option);
     }
