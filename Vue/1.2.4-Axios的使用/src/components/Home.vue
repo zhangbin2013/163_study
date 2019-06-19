@@ -3,7 +3,7 @@
     <h1>{{ testData }}</h1>
     <h2>这个是home页面</h2>
     <button @click="jump">编程式点击跳转到About页面</button>
-   </div> 
+   </div>
 </template>
 
 <script>
@@ -18,16 +18,16 @@ export default {
   created () {
     this.getData();
   },
-  
+
   methods: {
       jump(){
           this.$router.push("/about/args");//这里传递的是字符串,也可以是一个json对象,this.$router.push({path:'/Cart'});
       },
       getData () {
-          //通过axios 别名 
+          //通过axios 别名
           // this是指向当前vue实例，千万不能丢掉，不然会报方法或对象undefined
           // this.$http.get('/api/api/test.json').then(response => {
- 
+
           //     this.testData = response.data;
           //     console.log(response.data);
           //     console.log(response.status);
@@ -38,13 +38,14 @@ export default {
           // }).catch(error => {
           //     console.log(error);
           // })
-          //通过axios API 
+          //通过axios API
           this.$http({
             method: 'get',
             url: '/api/api/test.json'
           }).then(response => {
              // console.log(response.data);
               this.testData = response.data;
+              console.log(response);
               console.log(response.data);
               console.log(response.status);
               console.log(response.statusText);
@@ -75,7 +76,7 @@ export default {
       }
 
   },
-  
+
 
 }
 </script>
