@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <my-com></my-com>
+        <my-com1></my-com1>
+    </div>
+    <div id="app2">
+        <my-com></my-com>
+        <my-com1></my-com1>
+    </div>
+ 
+    <script>
+        /*创建组件*/
+        var myCom = Vue.extend({
+            template: '<div>这是我的全局组件</div>'
+        });
+        var myCom1 = Vue.extend({
+            template: '<div>这是我的局部组件</div>'
+        });  
+
+        /*全局注册组件*/
+        Vue.component('my-com',myCom);
+ 
+        /*定义vue实例app1*/
+        var app1 = new Vue({
+            el: '#app1'
+        });
+ 
+        /*定义vue实例app2*/
+        var app2 = new Vue({
+            el: '#app2',
+            components: {
+                'my-com1': myCom1
+            }
+
+        });
+    </script>
+</body>
+</html>

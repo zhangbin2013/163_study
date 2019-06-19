@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>1.1.5</title>
+</head>
+<body>
+ 
+    <script type="text/javascript">
+        window.onload = function() {
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    myText: '我是生命周期！',
+            
+                },
+                beforeCreate () {
+                    console.log('==============' + 'beforeCreated' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+               
+                },
+                created () {
+                    console.log('==============' + 'created' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+                },
+                beforeMount () {
+                    console.log('==============' + 'beforeMount' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+
+                },
+                mounted () {
+                    console.log('==============' + 'mounted' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+                },
+                beforeUpdate () {
+                    console.log('==============' + 'beforeUpdate' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+
+                },
+                updated () {
+                    console.log('==============' + 'updated' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+  
+                },
+                beforeDestroy () {
+                    console.log('==============' + 'beforeDestroy' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+      
+                },
+                destroyed () {
+                    console.log('==============' + 'destroyed' + '===================')
+                    console.log(this.$el)
+                    console.log(this.$data)
+      
+                }
+
+
+
+            })
+            
+         
+        }
+
+    </script> 
+
+<div id="app">
+    <input type="text" v-model="myText">{{myText}}
+    
+</div>
+
+</body>
+</html>

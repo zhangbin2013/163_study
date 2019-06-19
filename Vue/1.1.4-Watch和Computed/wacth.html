@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>1.1.4-Watch和Computer</title>
+</head>
+   <body>
+      <div id = "computed_props">
+         千米 : <input type = "text" v-model = "kilometers">
+         米 : <input type = "text" v-model = "meters">
+      </div>
+	   <p id="info"></p>
+      <script type = "text/javascript">
+         var vm = new Vue({
+            el: '#computed_props',
+            data: {
+               kilometers : 0,
+               meters:0
+            },
+            watch : {
+               kilometers:function(val) {
+                  this.kilometers = val;
+                  this.meters = this.kilometers * 1000
+               },
+               meters : function (val) {
+                  this.kilometers = val/ 1000;
+                  this.meters = val;
+               }
+            }
+         });
+
+      </script>
+   </body>
+</html>

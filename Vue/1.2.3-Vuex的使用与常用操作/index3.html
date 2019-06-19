@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuex</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+
+<body>
+    <div id="app">
+        <demo></demo>
+    </div>
+</body>
+<script>
+    Vue.use(Vuex);
+    var myStore = new Vuex.Store({
+        state: {
+            //存放组件之间共享的数据
+            name: "Remi",
+            age: 18
+        },
+        mutations: {//mutations方法必须是同步方法！
+            //显式的更改state里的数据
+            //　mutations下的函数接收state作为参数
+            // 载荷第二参数 :比如说提交了什么，提交的东西是用来干什么的，包含多个字段，所以载荷一般是对象
+            change: function (state, a) {
+                state.age += a;
+                //console.log(state.age);
+
+            }
+        },
+        getters: {
+            getAge: function (state) {
+                return state.age;
+            }
+        },
+        actions: {
+            //设置延时
+            add: function (context, value) {
+                setTimeout(function () {
+                    //提交事件
+                    context.commit('change', value);
+                }, 2000)
+
+            }
+        }
+    });
+
+    Vue.component('demo', {
+        template:`
+                <div>
+                    <p @click='changeAge'>姓名：{{name}} 年龄：{{age}}</p>
+                    <button @click='changeAgeAnsyc'>change</button>
+                </div>`,
+        computed: {
+            name: function () {
+                return this.$store.state.name
+            },
+            age: function () {
+                return this.$store.getters.getAge
+            }
+        },
+        methods: {
+            changeAge: function () {
+                //在组件里提交
+
+                this.$store.commit('change', 10)
+            },
+            changeAgeAnsyc: function () {
+                this.$store.dispatch('add', 1);
+            }
+            //在组件里派发事件 changeAgeAnsyc-->
+            //actions里的add函数被触发-->mutations里的change函数触发
+        }
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            name: "xiao"
+        },
+        store: myStore,
+        mounted: function () {
+            console.log(this)
+        }
+    })
+</script>
+
+</html>

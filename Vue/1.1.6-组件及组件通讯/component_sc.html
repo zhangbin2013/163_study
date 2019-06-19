@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue组件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <my-com></my-com>
+        <my-com1></my-com1>
+    </div>
+ 
+    <template id="myCom">
+        <div>这是template标签构建的组件</div>
+    </template>
+ 
+    <script type="text/x-template" id="myCom1">
+        <div>这是script标签构建的组件</div>
+    </script>
+ 
+    <script>
+        Vue.component('my-com1',{ //全局注册
+            template: '#myCom1'
+        });
+ 
+        var app1 = new Vue({
+            el: '#app1',
+            components:{
+                'my-com':{
+                    template: '#myCom'  //局部注册
+                }
+            }
+        });
+    </script>
+</body>
+</html>

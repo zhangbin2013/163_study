@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1.1.7-Vue内置动画</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+/* animation-name	规定需要绑定到选择器的 keyframe 名称。。
+animation-duration	规定完成动画所花费的时间，以秒或毫秒计。
+animation-timing-function	规定动画的速度曲线。
+animation-delay	规定在动画开始之前的延迟。
+animation-iteration-count	规定动画应该播放的次数。
+animation-direction	规定是否应该轮流反向播放动画。 */
+.bounce-enter-active {
+  animation: bounce-in 2s;
+}
+.bounce-leave-active {
+  animation: bounce-in 2s reverse;  /* reverse 动画反向播放。*/
+}
+/* 使用@keyframes规则，你可以创建动画。
+创建动画是通过逐步改变从一个CSS样式设定到另一个。
+在动画过程中，您可以更改CSS样式的设定多次。
+指定的变化时发生时使用％，或关键字"from"和"to"，这是和0％到100％相同。 动画持续时间的百分比。 */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);/* 缩放， */
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
+</head>
+<body>
+<div id = "app">
+<button v-on:click = "show = !show">点我</button>
+<transition name="bounce">
+    <p v-if="show">Vue内置动画</p>
+</transition>
+</div>
+<script type = "text/javascript">
+    new Vue({
+        el: '#app',
+        data: {
+            show: true
+        }
+    })
+</script>
+</body>
+</html>

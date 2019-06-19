@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>1.1.4-Watch和Computer</title>
+</head>
+<body>
+ 
+    <script type="text/javascript">
+        window.onload = function() {
+            var vm = new Vue({
+                el: '#app',
+                // watch
+                data: {
+                    firstName: '北京 - ',
+                    lastName: '王五',
+                    fullName: '北京 - 王五'
+                },
+                watch: {
+                    firstName: function (val) {
+                       
+                        //console.log(this.fullName);
+                        this.fullName = val + ' ' + this.lastName
+                        // console.log(this.firstName);
+                        // console.log(this.fullName);
+                    },
+                    lastName: function (val) {
+                        this.fullName = this.firstName + ' ' + val
+                    }
+                } 
+
+
+            })
+            
+            vm.firstName = "杭州 - ";  
+
+        }
+
+    </script> 
+
+<div id="app">
+    {{fullName}}  
+</div>
+
+</body>
+</html>

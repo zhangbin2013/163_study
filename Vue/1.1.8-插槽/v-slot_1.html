@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>1.1.7-插槽</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+   <!--父组件-->
+    <template>
+      <!-- 匿名slot -->
+      <!-- 使用子组件 -->
+      <v-one>
+            <!-- 这里的所有内容会替换掉slot -->
+            <p>初始化段落一</p>
+            <p>初始化段落二</p>
+      </v-one>
+      
+    </template>
+ 
+
+  </div>
+  <!-- 子组件 -->
+  <template id="one">
+    <div>
+      <h1>组件标题</h1>
+      <slot></slot>
+      <p>组件段落内容</p>
+      <p>{{one}}</p>
+    </div>
+  </template>
+
+  <script>
+    new Vue({
+        el: '#app',
+        components: {
+            'v-one': {
+                template: '#one',
+                data() {
+                    return {
+                        'one': 'I am one'
+                    }
+                }
+            }
+        }
+    });
+  </script>
+</body>
+
+</html>

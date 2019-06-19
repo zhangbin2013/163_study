@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>1.1.6-Vue组件及通讯</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+ <div id="app">
+        <box1 class="box1"></box1>
+        <box2 class="box2"></box2>
+</div>
+<script>
+    // 非父子组件之间通过一个空Vue实例来传递数据：
+    // bus为：公交车 （运送数据）
+    const bus = new Vue()
+    //创建组件
+    Vue.component('box1', {
+        data() {
+            return {
+                msg: 'I love you !!!'
+            }
+        },
+        template: `
+        <div>
+            <p>这是box1组件,他说:{{ msg }}</p>
+             <button @click='fn'>按钮</button>
+        </div>
+         `,
+        methods: {
+            fn() {
+                //把数据传送到公共Vue实例上，参数一是bus的事件，参二是发出的数据
+                bus.$emit('love', this.msg)
+            }
+        }
+    })
+    //创建组件
+    Vue.component('box2', {
+        data() {
+            return {
+                msg: ''
+            }
+        },
+        template: `
+        <div>
+            <p>接受到box1的表白：{{ msg }}</p>
+         </div>
+         `,
+        created() {
+            //给bus注册事件，接收数据
+            bus.$on('love', (data) => {
+               // console.log(data)
+                this.msg = data
+            })
+        }
+    })
+    //一个Vue实例
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+
+
+
+</script>
+
+
+</body>
+</html>

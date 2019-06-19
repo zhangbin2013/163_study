@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>1.1.6-Vue组件及通讯</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+ <div id="app">
+    <father class="father"></father>
+</div>
+<script>
+    //创建父组件
+    Vue.component('father', {
+        data() {
+            return {
+                skill: ''
+            }
+        },
+        // 在子组件里面自定义了一个 fn事件 
+        template: `
+            <div>
+                 <p>父听子说:{{skill}}</p>
+  
+                 <son class='son' @fn='getSkill'></son>
+            </div>
+         `,
+        
+        methods: {
+            // 父组件中提供一个方法
+            getSkill(skill) {
+                //console.log(skill);
+                // 参数skill就是子组件中传递过来的数据
+                this.skill = skill
+            }
+        }
+    })
+    //创建子组件
+    Vue.component('son', {
+        data() {
+            return {
+                msg: '少喝酒，少抽烟，注意身体',
+            }
+        },
+        template: `
+        <div>
+             <p>子对父说:{{msg}}</p>
+        </div>
+         `,
+        created() {
+            // 调用父组件中传递过来的方法，将数据作为参数传递
+            // 第一个参数：表示要调用的方法名称
+            // 第二个参数：表示传递父组件的数据
+            this.$emit('fn', this.msg) ////触发当前实例上的事件
+        }
+    })
+    //一个Vue实例
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+
+</script>
+
+
+</body>
+</html>

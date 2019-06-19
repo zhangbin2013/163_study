@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>1.1.7-插槽</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 父组件默认无法使用子组件数据 -->
+    <!--父组件-->
+    <template>
+      <h3>这里是父组件</h3>
+      <!-- 作用域插槽 -->
+      <v-three>
+      <!-- template scope="props"来获取插槽上的属性值，获取到的值是一个对象。 -->
+          <template scope="props"> 
+                <!-- 直接显示 -->
+              <p>{{props.text}}</p>
+          </template> 
+
+      </v-three>
+
+    </template>
+
+
+  </div>
+
+
+<!-- 作用域插槽 -->
+<!--子组件-->
+  <template id="three">
+    <div>
+        <!-- 把数据传递给slot,这样父组件也可以访问three这个组件的数据 -->
+      <slot :text="three"></slot>
+    </div>
+  </template>
+  
+  <script>
+    new Vue({
+        el: '#app',
+        components: {
+            'v-three': {
+                template: '#three',
+                data() {
+                    return {
+                        'three': 'I am three'
+                    }
+                }
+            }
+        }
+    });
+  </script>
+</body>
+
+</html>

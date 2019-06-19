@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>1.1.6-Vue组件及通讯</title>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+ <div id="app">
+    <father class="father"></father>
+</div>
+<script>
+
+    //创建父组件
+    Vue.component('father', {
+        data() {
+            return {
+                 msg: '好好学习，天天向上', 
+            }
+        },
+         // :skill="msg" 自定义属性绑定动态数据
+        template: `
+            <div>
+                <p>父对子说:{{msg}}</p>
+                <son class='son' :skill="msg"></son>
+            </div>
+         `
+     })
+    //创建子组件
+    Vue.component('son', {
+        template: `
+            <div>
+                <p>子听父说:{{skill}}</p>
+            </div>
+         `,
+         props: ['skill'] //子组件通过 props: ['skill']获取skill属性的值
+    })
+    //一个Vue实例
+    var vm = new Vue({
+        el: '#app',
+        data: {
+        }
+    })
+</script>
+
+
+</body>
+</html>

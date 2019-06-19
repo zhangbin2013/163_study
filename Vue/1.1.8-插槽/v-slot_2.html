@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>1.1.7-插槽</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--父组件-->
+    <template>
+      <!-- 具名slot -->
+      <v-two>
+            <p slot="nav">我是导航</p>
+            <p slot="main">我是内容</p>
+            <p slot="footer">我是底部</p>
+      </v-two>
+      
+    </template>  
+  </div>
+
+  <!-- 具名slot -->
+  <template id="two">
+    <div>
+      <nav>
+        <slot name="nav"></slot>
+      </nav>
+
+      <main>
+        <slot name="main"></slot>
+      </main>
+
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+
+    </div>
+  </template>
+
+
+  <script>
+    new Vue({
+        el: '#app',
+        components: {
+            'v-two': {
+                template: '#two',
+                data() {
+                    return {
+                        'two': 'I am two'
+                    }
+                }
+            }
+        }
+    });
+  </script>
+</body>
+
+</html>

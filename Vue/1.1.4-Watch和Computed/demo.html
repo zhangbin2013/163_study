@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>1.1.4-Watch和Computer</title>
+</head>
+<body>
+    <div id="app">
+         <button @click="getMethodsDate">methods</button>
+         <button @click="getComputedDate">computed</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            methods: {
+                getMethodsDate: function () {
+                    alert(new Date())
+                },
+                // 返回computed选项中设置的计算属性——computedDate
+                getComputedDate: function () {
+                    alert(this.computedDate)
+                }
+            },
+            computed: {
+                computedDate: function () {
+                    return new Date()
+                }
+             }
+        })
+   
+    </script>
+    
+</body>
+</html>

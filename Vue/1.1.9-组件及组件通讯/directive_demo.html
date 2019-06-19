@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>1.1.9-自定义指令</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <p>{{msg}}</p>
+        <!-- 准备实现需求：
+          在h1标签上面，加上一个按钮，当点击按钮时候，对count实现一次
+          自增操作，当count等于5的时候，在控制台输出‘数据已经到5了！’
+        -->
+        <button @click="handleClick">clickMe</button>
+        <!-- v-if 指令将根据表达式 count < 6 的值(true 或 false )来决定是否插入 h1 元素。 -->
+        <h1
+                v-if="count < 6"
+                v-change="count">it is a custom directive</h1>
+    </div>
+    
+    <script>
+        //directive
+        new Vue({
+            el: '#container',
+            data: {
+                msg: 'Hello Vue',
+                count:0
+            },
+            methods:{
+                handleClick: function () {
+                    //按钮单击，count自增
+                    this.count++;
+                }
+            },
+            directives:{
+                change:{
+                    bind: function (el,bindings) {
+                       
+                        console.log('指令已经绑定到元素了');
+                        console.log(el);
+                        console.log(bindings);
+                        //准备将传递来的参数
+                        // 显示在调用该指令的元素的innerHTML
+                        el.innerHTML = bindings.value;
+                    },
+                    update: function (el,bindings) {
+                        console.log('指令的数据有所变化');
+                        console.log(el);
+                        console.log(bindings);
+                        el.innerHTML = bindings.value;
+                        if(bindings.value == 5)
+                        {
+                            console.log('数据已经到5了！');
+                        }
+                    },
+                    unbind: function () {
+                        console.log('解除绑定了');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

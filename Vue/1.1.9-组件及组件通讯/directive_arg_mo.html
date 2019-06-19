@@ -1,0 +1,31 @@
+<div id="app">
+    <div class="card" v-card.bottom.left="card2.pin">
+      <button @click="card2.pin = !card2.pin">固定/取消</button>
+             卡片2
+        </div>
+    </div>
+<script>
+    Vue.directive("card", function (el, binding) {
+        var val = binding.value;
+        var position = binding.modifiers;//获取对象数组，使用需要遍历
+        var warnning = binding.arg;//获取true属性
+        if (val) {
+            el.style.position = "fixed";
+            for (var key in position) {//遍历对象数组，使用modifier属性
+                if (position[key]) {
+                    el.style[key] = '10px';
+                }
+                if (warnning) {//使用arg属性
+                    el.style.background = "yellow";
+                }
+            }
+        } else {
+            el.style.position = "static";
+        }
+
+    });
+
+
+</script>
+</body>
+</html>

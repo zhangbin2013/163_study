@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>1.1.7-Vue内置动画</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .show{
+            transition: all 2s ease;  /*ease  慢速开始,中间变快,慢速结束; */
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+        <button @click="toggle">点击隐藏和显示</button>
+            <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+                <div v-show="isshow" class="show">{{message}}</div>
+            </transition>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message:"hello Vue!",
+          isshow:false
+        },
+        methods:{
+            toggle:function(){
+                this.isshow = !this.isshow;
+            },
+            beforeEnter:function(el){
+                //定义当前实现动画的初始位置
+                el.style.transform = "translate(100px,0)";
+            },
+            enter:function(el,done){
+                //设置一下刷新状态
+                el.offsetWidth;
+                //设置动画的结束位置
+                el.style.transform = "translate(0px,0)";
+                //手动调用一下done方法，由这个方法去决定动画是否结束了
+                //否则动画的消失会有延迟
+                done();
+            },
+            afterEnter:function(el){
+                //将动画的状态复原设置
+               // this.isshow = !this.isshow;
+            }
+        }
+      })
+    </script>
+  </body>
+</html>

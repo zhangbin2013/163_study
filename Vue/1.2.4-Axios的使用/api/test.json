@@ -1,0 +1,25 @@
+{
+    "getNetworkList": [
+      {
+        "id": 1,
+        "title": "百度",
+        "url": "http://baidu.com"
+      },
+      {
+        "id": 2,
+        "title": "腾讯",
+        "url": "http://qq.com"
+      },
+      {
+        "id": 3,
+        "title": "网易",
+        "url": "https://www.163.com/"
+      },
+      {
+        "id": 4,
+        "title": "淘宝",
+        "url": "http://taobao.com"
+      }
+    ]
+
+  }

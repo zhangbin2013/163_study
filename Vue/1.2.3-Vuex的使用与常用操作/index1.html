@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vuex</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+
+<body>
+    <div id="app">
+        <demo></demo>
+    </div>
+</body>
+<script>
+    Vue.use(Vuex);
+    var myStore = new Vuex.Store({
+        state: {
+            //存放组件之间共享的数据
+            name: "Remi",
+            age: "18"
+        },
+        mutations: {
+            //显式的更改state里的数据
+        },
+        getters: {
+            getAge: function (state) {
+                return state.age;
+            }
+        },
+        actions: {
+            //异步处理
+        }
+    });
+
+    Vue.component('demo', {
+        template: "<p>{{name}}{{age}}</p>",
+        computed: {
+            name: function () {
+                return this.$store.state.name
+            },
+            age: function () {
+                return this.$store.getters.getAge
+            }
+        },
+
+    })
+    new Vue({
+        el: "#app",
+        data: {
+            name: "xiao"
+        },
+        store: myStore,
+        mounted: function () {
+            console.log(this)
+        }
+    })
+</script>
+
+</html>
