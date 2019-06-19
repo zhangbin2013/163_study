@@ -1,10 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>1.1.9-自定义指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
 <div id="app">
-    <div class="card" v-card.bottom.left="card2.pin">
-      <button @click="card2.pin = !card2.pin">固定/取消</button>
-             卡片2
-        </div>
+    <div class="card" v-card:bb.bottom.left="card2.pin">
+        <button @click="card2.pin = !card2.pin">固定/取消</button>
+        卡片2
     </div>
+</div>
 <script>
+    new Vue({
+        el: '#app',
+        data: {
+            card2: {
+                pin: true
+            }
+        }
+    });
     Vue.directive("card", function (el, binding) {
         var val = binding.value;
         var position = binding.modifiers;//获取对象数组，使用需要遍历

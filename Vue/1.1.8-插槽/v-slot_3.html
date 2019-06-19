@@ -16,10 +16,11 @@
       <!-- 作用域插槽 -->
       <v-three>
       <!-- template scope="props"来获取插槽上的属性值，获取到的值是一个对象。 -->
-          <template scope="props"> 
+          <template slot-scope="data">
                 <!-- 直接显示 -->
-              <p>{{props.text}}</p>
-          </template> 
+              <p>{{data.text}}</p>
+              <p>{{data.type}}</p>
+          </template>
 
       </v-three>
 
@@ -34,10 +35,10 @@
   <template id="three">
     <div>
         <!-- 把数据传递给slot,这样父组件也可以访问three这个组件的数据 -->
-      <slot :text="three"></slot>
+      <slot :text="three" :type="two"></slot>
     </div>
   </template>
-  
+
   <script>
     new Vue({
         el: '#app',
@@ -46,7 +47,8 @@
                 template: '#three',
                 data() {
                     return {
-                        'three': 'I am three'
+                        'three': 'I am three',
+                        'two': 'I am two'
                     }
                 }
             }

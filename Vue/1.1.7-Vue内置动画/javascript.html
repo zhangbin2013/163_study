@@ -13,7 +13,8 @@
   <body>
     <div id="app">
         <button @click="toggle">点击隐藏和显示</button>
-            <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"
+            @before-leave="enter" @leave="beforeEnter" @after-leave="afterEnter">
                 <div v-show="isshow" class="show">{{message}}</div>
             </transition>
     </div>
