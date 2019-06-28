@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app"></div>
+		<script src="Vue.js"></script>
+		<script>
+			// 			//count  自定义策略处理  parentVal   == Vue.options.count  === undefined     childVal  === 1
+			// 			Vue.config.optionMergeStrategies.count = function(parentVal, childVal, vm) {
+			// 				return childVal >= 10 ? childVal : 10;
+			// 			}
+			// 			//Vue 构造函数
+			// 			var vm = new Vue({
+			// 				el: "#app", //el
+			// 				data: { //data
+			// 					root: "max"
+			// 				},
+			// 				count: 1, //自定义的选项  count  自定义策略处理
+			// 				components: {},
+			// 				beforeCreate: [
+			// 					function() {
+			// 						//vm.count 代理  this
+			// 						console.log("hello max")
+			// 					}, 
+			// 					function() {
+			// 						console.log("hello kaixin")
+			// 					}
+			// 				]
+			// 			})
+			// 
+			// 			//组件的这些选项  组件是可复用的Vue的实例
+			// 			console.log(vm.$options)
+            
+			//
+			Vue.extend({
+				data:{    //data的选项必须是函数  创建组件
+					
+				}
+			});
+		</script>
+	</body>
+</html>

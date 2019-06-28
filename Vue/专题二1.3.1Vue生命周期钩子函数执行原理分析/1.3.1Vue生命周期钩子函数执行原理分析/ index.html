@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<component-a></component-a>
+		</div>
+		<script src="vue2.5.1.js"></script>
+		<script>
+			//组件选项的对象   注册局部组件的方式
+			var ComponentA = {
+				template:"<div>max</div>"
+			}
+			new Vue({
+				el:"#app",
+				components:{
+					"component-a" : ComponentA
+				}
+			})
+			
+			
+
+		</script>
+	</body>
+</html>
