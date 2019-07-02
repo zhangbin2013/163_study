@@ -4495,7 +4495,7 @@
 
 		return vnode
 	}
-
+// 实例化子类 => 组件
 	function createComponentInstanceForVnode(
 		vnode, // we know it's MountedComponentVNode but flow doesn't
 		parent // activeInstance in lifecycle state
