@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			
+		</div>
+		<script src="vue2.5.1.js"></script>
+		<script>
+			//组件选项的对象   注册局部组件的方式
+			// var ComponentA = {
+			// 	template:"<div>max</div>"
+			// }
+			
+			//属性的优先级  data >  methods     props  > data    props > data > methods
+			var vm = new Vue({
+				el: "#app",
+				data: {
+					$root1:"max",    //不代理   为了避免自身属性的冲突  _   $
+				},
+				methods:{
+					fn: function(){
+						
+					}
+				}
+			});
+			
+			//不会代理   vm._data
+			console.log(vm.$root1)   // 代理的形式访问    undefined
+			console.log(vm._data.$root1)   //数据对象上的 $root    max
+			
+
+
+		</script>
+	</body>
+</html>

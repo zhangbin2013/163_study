@@ -487,7 +487,7 @@
 	 * Check if a string starts with $ or _
 	 */
 	function isReserved(str) {
-		var c = (str + '').charCodeAt(0); // 获取Unicode 编码
+		var c = (str + '').charCodeAt(0);
 		return c === 0x24 || c === 0x5F
 	}
 
@@ -1243,6 +1243,7 @@
 			// merged result of both functions... no need to
 			// check if parentVal is a function here because
 			// it has to be a function to pass previous merges.
+			//选项合并
 			return function mergedDataFn() {
 				return mergeData(
 					typeof childVal === 'function' ? childVal.call(this, this) : childVal,
@@ -1283,9 +1284,10 @@
 
 				return parentVal
 			}
+			//处理子组件data的选项
 			return mergeDataOrFn(parentVal, childVal)
 		}
-
+           //处理根实例data的选项
 		return mergeDataOrFn(parentVal, childVal, vm)
 	};
 
@@ -3514,7 +3516,6 @@
 		Object.defineProperty(target, key, sharedPropertyDefinition);
 	}
 
-	// 数据初始化操作
 	function initState(vm) {
 		vm._watchers = [];
 		var opts = vm.$options;
@@ -3524,7 +3525,7 @@
 		if (opts.methods) {
 			initMethods(vm, opts.methods);
 		}
-		if (opts.data) {
+		if (opts.data) {    //data == mergedInstanceDataFn
 			initData(vm);
 		} else {
 			observe(vm._data = {}, true /* asRootData */ );
@@ -3599,7 +3600,7 @@
 			);
 		}
 		// proxy data on instance
-		var keys = Object.keys(data); // 数据对象属性
+		var keys = Object.keys(data);
 		var props = vm.$options.props;
 		var methods = vm.$options.methods;
 		var i = keys.length;
@@ -3619,11 +3620,11 @@
 					vm
 				);
 			} else if (!isReserved(key)) {
-				// 数据代理是否有不合法的属性
+				//数据代理的时候 是否有不合法的属性
 				proxy(vm, "_data", key);
 			}
 		}
-		// observe data  开启相应之路
+		// observe data  开启响应式之路
 		observe(data, true /* asRootData */ );
 	}
 
@@ -4497,7 +4498,7 @@
 
 		return vnode
 	}
-// 实例化子类 => 组件
+
 	function createComponentInstanceForVnode(
 		vnode, // we know it's MountedComponentVNode but flow doesn't
 		parent // activeInstance in lifecycle state
