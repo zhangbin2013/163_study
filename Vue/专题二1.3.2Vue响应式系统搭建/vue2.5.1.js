@@ -2142,7 +2142,7 @@
 				var handlers = options.render && options.render._withStripped ?
 					getHandler :
 					hasHandler;
-				vm._renderProxy = new Proxy(vm, handlers);
+				vm._renderProxy = new Proxy(vm, handlers); //代理 渲染函数作用域代理 $data
 			} else {
 				vm._renderProxy = vm;
 			}
@@ -3500,15 +3500,16 @@
 	/*  */
 
 	var sharedPropertyDefinition = {
-		enumerable: true,
-		configurable: true,
+		enumerable: true, // 可枚举
+		configurable: true, // 可配置
 		get: noop,
 		set: noop
 	};
 
+	// target => vm, sourceKey === 'data'， key => 数据对象属性
 	function proxy(target, sourceKey, key) {
 		sharedPropertyDefinition.get = function proxyGetter() {
-			return this[sourceKey][key]
+			return this[sourceKey][key] // this => vm
 		};
 		sharedPropertyDefinition.set = function proxySetter(val) {
 			this[sourceKey][key] = val;
@@ -3621,6 +3622,7 @@
 				);
 			} else if (!isReserved(key)) {
 				//数据代理的时候 是否有不合法的属性
+				//vm._data === 以获取数据对象的引用
 				proxy(vm, "_data", key);
 			}
 		}
